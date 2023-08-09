@@ -88,4 +88,4 @@ There are three example notebooks:
 
 ## Background
 
-If you want to know how the core of this package works, read [the blog post]()!
+If you want to know how the core of this package works, read [the blog post](https://codingfisch.github.io/2023/08/09/affine-registration-in-12-lines-of-code.html)!
