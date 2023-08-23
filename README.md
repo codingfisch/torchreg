@@ -44,7 +44,7 @@ def dice_loss(x1, x2):
     union = torch.sum(x1 + x2, dim=dim)
     return 1 - (2. * inter / union).mean()
 
-reg = AffineRegistration(dissimilairity_function=dice_loss, optimizer=torch.optim.Adam)
+reg = AffineRegistration(dissimilarity_function=dice_loss, optimizer=torch.optim.Adam)
 ```
 CUDA support (NVIDIA GPU)
 ```python
