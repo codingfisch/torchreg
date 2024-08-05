@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'torchreg'
-version = '0.0.1'
+version = '0.1.0'
 description = 'Lightweight image registration library using PyTorch'
 authors = ['codingfisch <l_fisc17@wwu.de>']
 license = 'MIT'
@@ -14,7 +14,7 @@ classifiers = [
 
 
 [tool.poetry.dependencies]
-python = '^3.0'
+python = '^3.8'
 torch = '*'
 tqdm = '*'
 
