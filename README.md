@@ -1,6 +1,6 @@
 # torchreg
 
-torchreg is a tiny (~100 lines) PyTorch-based library for 2D and 3D image registration.
+torchreg is a tiny (~300 lines) PyTorch-based library for 2D and 3D image registration.
 
 <p float="left", align="center">
 <img src="https://github.com/codingfisch/torchreg/blob/main/examples/alice_big.jpg" width="256"/>
@@ -14,12 +14,12 @@ Affine Registration of two image tensors is done via:
 from torchreg import AffineRegistration
 
 # Load images as torch Tensors
-small_alice = ...  # Tensor with shape [1, 3 (color channel), 1024 (pixel), 1024 (pixel)]
 big_alice = ...    # Tensor with shape [1, 3 (color channel), 1024 (pixel), 1024 (pixel)]
+small_alice = ...  # Tensor with shape [1, 3 (color channel), 1024 (pixel), 1024 (pixel)]
 # Intialize AffineRegistration
 reg = AffineRegistration(is_3d=False)
 # Run it!
-moved_alice = reg(small_alice, big_alice)
+moved_alice = reg(big_alice, small_alice)
 ```
 
 ## Features
@@ -49,10 +49,6 @@ reg = AffineRegistration(dissimilarity_function=dice_loss, optimizer=torch.optim
 CUDA support (NVIDIA GPU)
 ```python
 moved_alice = reg(moving=big_alice.cuda(), static=small_alice.cuda())
-```
-MPS support (Apple M1 or M2)
-```python
-moved_alice = reg(moving=big_alice.to('mps'), static=small_alice.to('mps'))
 ```
 
 After the registration is run, you can apply it to new images (coregistration)
@@ -89,3 +85,6 @@ There are three example notebooks:
 ## Background
 
 If you want to know how the core of this package works, read [the blog post](https://codingfisch.github.io/2023/08/09/affine-registration-in-12-lines-of-code.html)!
+
+## TODO
+- [ ] Add 2D support to SyN, NCC and LinearElasticity
