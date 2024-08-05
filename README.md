@@ -3,8 +3,8 @@
 torchreg is a tiny (~300 lines) PyTorch-based library for 2D and 3D image registration.
 
 <p float="left", align="center">
-<img src="https://github.com/codingfisch/torchreg/blob/main/examples/alice_big.jpg" width="256"/>
-<img src="https://github.com/codingfisch/torchreg/blob/main/examples/alice_small.jpg" width="256"/>
+<img src="https://raw.githubusercontent.com/codingfisch/torchreg/main/examples/alice_big.jpg" width="256"/>
+<img src="https://raw.githubusercontent.com/codingfisch/torchreg/main/examples/alice_small.jpg" width="256"/>
 <img src="https://github.com/codingfisch/torchreg/assets/55840648/ddc495fb-f5be-4bba-a8ab-c474a85a34ff" width="256"/>
 </p>
 
