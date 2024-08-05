@@ -88,3 +88,4 @@ If you want to know how the core of this package works, read [the blog post](htt
 
 ## TODO
 - [ ] Add 2D support to SyN, NCC and LinearElasticity
+- [ ] Add tests for SyN
