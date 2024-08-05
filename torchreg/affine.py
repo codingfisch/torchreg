@@ -27,10 +27,6 @@ class AffineRegistration:
         if len(moving.shape) - 4 != self.is_3d or len(static.shape) - 4 != self.is_3d:
             raise ValueError(f'Expected moving and static to be {4 + self.is_3d}D Tensors (2 + Spatial Dims.). '
                              f'Got size {moving.shape} and {static.shape}.')
-        if moving.shape != static.shape:
-            raise ValueError(f'Expected moving and static to have the same size. '
-                             f'Got size {moving.shape} and {static.shape}.')
-
         self._parameters = init_parameters(self.is_3d, len(static), static.device, *self.withs, *self.inits)
         interp_kwargs = {'mode': self.interp_mode, 'align_corners': self.align_corners}
         moving_ = F.interpolate(moving, static.shape[2:], **interp_kwargs)
@@ -52,7 +48,7 @@ class AffineRegistration:
             optimizer.step()
 
     def transform(self, moving, shape=None, with_grad=False):
-        affine = self.get_affine(with_grad)
+        affine = self.get_affine(with_grad).type(moving.dtype)
         return affine_transform(moving, affine, shape, self.interp_mode, self.padding_mode, self.align_corners)
 
     def get_affine(self, with_grad=False):
