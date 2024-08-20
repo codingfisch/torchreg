@@ -1,6 +1,6 @@
 [tool.poetry]
 name = 'torchreg'
-version = '0.1.1'
+version = '0.1.2'
 description = 'Lightweight image registration library using PyTorch'
 authors = ['codingfisch <l_fisc17@wwu.de>']
 license = 'MIT'
