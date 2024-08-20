@@ -9,9 +9,8 @@ LIN_ELAST_FUNC = lambda x: LinearElasticity(mu=2., lam=1.)(x)
 
 
 class SyNBase:
-    def __init__(self, time_steps=7, factor_diffeo=.1):
+    def __init__(self, time_steps=7):
         self.time_steps = time_steps
-        self.factor_diffeo = factor_diffeo
         self._grid = None
 
     def apply_flows(self, x, y, v_xy, v_yx):
@@ -27,7 +26,7 @@ class SyNBase:
         return images, flows
 
     def diffeomorphic_transform(self, v):
-        v = self.factor_diffeo * v / (2 ** self.time_steps)
+        v = v / (2 ** self.time_steps)
         for i in range(self.time_steps):
             v = v + self.spatial_transform(v, v)
         return v
