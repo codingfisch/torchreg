@@ -22,6 +22,7 @@ class AffineRegistration:
         self.interp_mode = 'trilinear' if is_3d else 'bilinear' if interp_mode is None else interp_mode
         self.padding_mode = padding_mode
         self._parameters = None
+        self._loss = None
 
     def __call__(self, moving, static, return_moved=True):
         if len(moving.shape) - 4 != self.is_3d or len(static.shape) - 4 != self.is_3d:
@@ -33,7 +34,7 @@ class AffineRegistration:
         for scale, iters in zip(self.scales, self.iterations):
             moving_small = F.interpolate(moving_, scale_factor=1 / scale, **interp_kwargs)
             static_small = F.interpolate(static, scale_factor=1 / scale, **interp_kwargs)
-            self._fit(moving_small, static_small, iters)
+            self._loss = self._fit(moving_small, static_small, iters)
         return self.transform(moving, static.shape[2:]).detach() if return_moved else None
 
     def _fit(self, moving, static, iterations):
@@ -46,6 +47,7 @@ class AffineRegistration:
             progress_bar.set_description(f'Shape: {[*static.shape]}; Dissimiliarity: {loss.item()}')
             loss.backward()
             optimizer.step()
+        return loss.item()
 
     def transform(self, moving, shape=None, with_grad=False):
         affine = self.get_affine(with_grad).type(moving.dtype)
